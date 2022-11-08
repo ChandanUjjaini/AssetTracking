@@ -4,7 +4,7 @@ using System.Runtime;
 
 int Sel;
 
-List<AssetData> AssetList = new List<AssetData>(); //Creating list for product details
+List<AssetData> AssetList = new List<AssetData>(); //Creating list for product details  
 
 
 do
