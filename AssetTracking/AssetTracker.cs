@@ -1,5 +1,6 @@
 ﻿// Program to track assset 
 using AssetTracking;
+using System.Diagnostics;
 using System.Runtime;
 
 int Sel;
@@ -13,11 +14,12 @@ do
     Console.WriteLine("*****************************************");
     Console.WriteLine("* Please Enter your selection from Menu *");
     Console.WriteLine("*****************************************");
-    Console.WriteLine("* Add Asset\t- 1\t\t\t*\n* Search Asset\t- 2\t\t\t*\n* Exit\t\t- 3\t\t\t*");
+    Console.WriteLine("* Add Asset\t- 1\t\t\t*\n* Search Asset\t- 2\t\t\t*\n* Sort\t\t- 3\t\t\t*\n* Exit\t\t- 4\t\t\t*");
     Console.WriteLine("*****************************************");
-    Console.Write("Please Select An Operation : ");
-    string inp = Console.ReadLine();
-    Sel = Convert.ToInt32(inp);
+
+    string number = DataIn.Selchk("selection",4);
+       
+    Sel = Convert.ToInt32(number);
 
     switch (Sel)
     {
@@ -37,9 +39,16 @@ do
                 Console.WriteLine("Search Asset");
                 break;
             }
+        case 3:
+            {
+                // Code to Display asset
+                Console.Clear();
+                AssetOp.SortList(AssetList);
+                break;
+            }
 
     }
-} while (Sel != 3);
+} while (Sel != 4);
 
 
 

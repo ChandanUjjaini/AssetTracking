@@ -8,13 +8,13 @@ namespace AssetTracking
 {
     internal class AssetData
     {
-        public AssetData(string type, string brand, string model, string date, string price, string location, string currency)
+        public AssetData(string type, string brand, string model, string location, string currency, string price, DateOnly pdate)
         {
             Type = type;
             Brand = brand;
             Model = model;
             
-            Date = date;
+            PDate = pdate;
             Price = price;
             Location = location;
             Currency = currency;
@@ -24,7 +24,7 @@ namespace AssetTracking
         public string Brand { get; set; }
         public string Model { get; set; }
         public string Location { get; set; }
-        public string Date { get; set; }
+        public DateOnly PDate { get; set; }
         public string Price { get; set; }
         public string Currency { get; set; }
 
