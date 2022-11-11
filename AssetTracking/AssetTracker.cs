@@ -6,6 +6,7 @@ using System.Runtime;
 int Sel;
 
 List<AssetData> AssetList = new List<AssetData>(); //Creating list for product details  
+List<Validation> CurrencyCode = new List<Validation>(); //Creating list for Currency Type Lookup
 
 
 do
@@ -14,13 +15,11 @@ do
     Console.WriteLine("*****************************************");
     Console.WriteLine("* Please Enter your selection from Menu *");
     Console.WriteLine("*****************************************");
-    Console.WriteLine("* Add Asset\t- 1\t\t\t*\n* Search Asset\t- 2\t\t\t*\n* Sort\t\t- 3\t\t\t*\n* Exit\t\t- 4\t\t\t*");
+    Console.WriteLine("* Add Asset\t- 1\t\t\t*\n* Sort\t\t- 2\t\t\t*\n* Exit\t\t- 3\t\t\t*");
     Console.WriteLine("*****************************************");
 
-    string number = DataIn.Selchk("selection",4);
-       
-    Sel = Convert.ToInt32(number);
-
+    Sel = DataIO.Selchk("selection",3);       
+    
     switch (Sel)
     {
         case 1:
@@ -31,25 +30,14 @@ do
                 AssetOp.Output(AssetList);
                 break;
             }
-
         case 2:
-            {
-                // Code to Search asset
-                Console.Clear();
-                Console.WriteLine("Search Asset");
-                break;
-            }
-        case 3:
             {
                 // Code to Display asset
                 Console.Clear();
                 AssetOp.SortList(AssetList);
+               
                 break;
             }
-
     }
-} while (Sel != 4);
-
-
-
+} while (Sel != 3);
 Console.ReadLine();
