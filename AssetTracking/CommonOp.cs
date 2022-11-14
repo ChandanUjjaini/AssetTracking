@@ -36,11 +36,24 @@ namespace AssetTracking
 
         public static string ExRate(string code) //Method to get exchange rate from Google Finance
         {
-            HtmlAgilityPack.HtmlWeb website = new HtmlAgilityPack.HtmlWeb(); //Need to add HtmlAgilityPack Nuget
-            String urlSrc = $"https://www.google.com/finance/quote/USD-"+code+"?hl=en";
-            HtmlAgilityPack.HtmlDocument document = website.Load(urlSrc);
-            var data = document.DocumentNode.SelectSingleNode("//div[@class='YMlKec fxKbKc']").InnerText;           
+            string data=null;
+            try
+            {
+                HtmlAgilityPack.HtmlWeb website = new HtmlAgilityPack.HtmlWeb(); //Need to add HtmlAgilityPack Nuget
+                String urlSrc = $"https://www.google.com/finance/quote/USD-" + code + "?hl=en";
+                HtmlAgilityPack.HtmlDocument document = website.Load(urlSrc);
+                data = document.DocumentNode.SelectSingleNode("//div[@class='YMlKec fxKbKc']").InnerText;                
+            }
+            catch (NullReferenceException nullexp)
+            {
+                if (code == "USD")
+                {
+                    data = "1";
+                }
+            }
             return data;
+
+
         }
     }
 }

@@ -48,32 +48,7 @@ namespace AssetTracking
             return read;
         }
 
-        public static bool ChkDate(String read)//Validation for input date
-        {
-            DateTime Data;
-            bool Flag;
-            Flag = (String.IsNullOrWhiteSpace(read));//Checking for null string
-            if (Flag == false)
-            {
-                Flag = DateTime.TryParse(read, out Data);
-                if (Flag == false)
-                {
-                    Flag = true;
-                }
-               else
-                {
-                    Flag = false;
-                }    
-            }
-            if (Flag == false)
-            {
-                Flag = DateTime.TryParse(read, out Data);
-                Flag = Data >= DateTime.Now;
-            }
-            GC.Collect();
-            return Flag;
-
-        }
+        
         public static bool codeVal(string read) //Checking for valid cuntry name
         {
             bool Flag;
@@ -81,8 +56,41 @@ namespace AssetTracking
             Data = Char.ToUpper(read[0]) + read.Substring(1);//Converting first character to uppercase
             string code = DataIO.Ccode2(Data);
             Flag = Validation.ChkData(code);
-            GC.Collect();
             return Flag;
+        }
+
+        internal static bool DateVal(String read)
+        {
+            DateTime Data;
+            bool Flag;
+           
+                Flag = (String.IsNullOrWhiteSpace(read));//Checking for null string
+                if (Flag == false)
+                {   try
+                    {
+                            Flag = DateTime.TryParse(read, out Data);
+                            if (Flag == false)
+                        {
+                            Flag = true;
+                        }
+                        else
+                        {
+                            Flag = false;
+                        }
+                    }
+                    catch (FormatException DateExp)
+                    {
+                    Flag = true;
+                    Console.WriteLine(DateExp.Message);
+                    }
+                }                           
+                
+                if (Flag == false)
+                {
+                    Flag = DateTime.TryParse(read, out Data);
+                    Flag = Data >= DateTime.Now;
+                }           
+               return Flag;
         }
     }
 

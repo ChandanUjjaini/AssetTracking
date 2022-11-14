@@ -64,14 +64,14 @@ namespace AssetTracking
             do
             {
                 ReadDate = CommonOp.ReadData(read + "in \"mm/dd/yyyy\" format");
-                Flag = Validation.ChkDate(ReadDate);
+                Flag = Validation.DateVal(ReadDate);
                 if (Flag == true)
                 {
                     CommonOp.ErrorMessage(read);
                 }                                       
             } while (Flag == true);
             Flag = DateOnly.TryParse(ReadDate, out DateOnly Data);
-            GC.Collect();
+            
 
             return Data;
 
@@ -123,17 +123,11 @@ namespace AssetTracking
         internal static decimal LocalPrice(string code, int price)
         {
             float data;
-            if (code == "USD")
-            {
-                data = price;
-                
-            }
-            else
-            {
-                String exrate = CommonOp.ExRate(code);
-                float exRate = float.Parse(exrate);
-                data = price * exRate;
-            }
+            
+            String exrate = CommonOp.ExRate(code);
+            float exRate = float.Parse(exrate);
+            data = price * exRate; // Converting currency to local
+            
             decimal Rdata = Convert.ToDecimal(data);
             Rdata = Math.Round(Rdata, 2);
             GC.Collect();
